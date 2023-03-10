@@ -5,9 +5,9 @@ echo Current Dir: %currDir%
 
 for /f "tokens=2 delims==" %%a in ('wmic OS Get localdatetime /value') do set "dt=%%a"
 set "YY=%dt:~2,2%" & set "YYYY=%dt:~0,4%" & set "MM=%dt:~4,2%" & set "DD=%dt:~6,2%"
-set "HH=%dt:~8,2%" & set "Min=%dt:~10,2%"
-rem  & set "Sec=%dt:~12,2%"
-set "fullstamp=%YYYY%-%MM%-%DD%_%HH%-%Min%-%Sec%"
+set "HH=%dt:~8,2%" & set "Min=%dt:~10,2%" & set "Sec=%dt:~12,2%"
+rem set "fullstamp=%YYYY%-%MM%-%DD%_%HH%-%Min%-%Sec%"
+set "fullstamp=%YYYY%-%MM%-%DD%_%HH%-%Min%"
 echo Timestamp: %fullstamp%
 
 :menu
@@ -62,9 +62,10 @@ goto menu
 	set bkpDir=%modeName%-%diffName%
 	echo Restore from dir: %bkpDir%
 	echo You are going to override current files in: %currDir%
-	set /p prompt=Are You Sure?[y/n]: 
-	if not %prompt%== y goto menu
-	rem xcopy %currDir%SPSlot*.sav* %currDir%%bkpDir%\*.* /v
+	rem set /p prompt=Are You Sure?[y/n]: 
+	rem if not %prompt%==y goto menu
+	
+	xcopy %currDir%%bkpDir%\SPSlot*.sav* %currDir%*.* /v
 
     PAUSE
 goto menu
