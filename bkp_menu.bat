@@ -61,6 +61,7 @@ goto menu
 	echo Level: %diffName%	
 	set bkpDir=%modeName%-%diffName%
 	echo Restore from dir: %bkpDir%
+	echo "Restore time: %fullstamp%">%currDir%%bkpDir%.txt
 	echo You are going to override current files in: %currDir%
 	rem set /p prompt=Are You Sure?[y/n]: 
 	rem if not %prompt%==y goto menu
