@@ -58,15 +58,17 @@ goto menu
 	echo Mode: %modeName%
 	set diffName=Welcome
     set /p diffName="Enter level name (press Enter for default [Welcome])=> "
-	echo Level: %diffName%	
+	echo Level: %diffName%
 	set bkpDir=%modeName%-%diffName%
 	echo Restore from dir: %bkpDir%
-	echo "Restore time: %fullstamp%">%currDir%%bkpDir%.txt
 	echo You are going to override current files in: %currDir%
 	rem set /p prompt=Are You Sure?[y/n]: 
 	rem if not %prompt%==y goto menu
-	
+
 	xcopy %currDir%%bkpDir%\SPSlot*.sav* %currDir%*.* /v
+	
+	del *.nfo
+	echo "Restore time: %fullstamp%">%currDir%%bkpDir%.nfo
 
     PAUSE
 goto menu
